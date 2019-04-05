@@ -1,5 +1,7 @@
 pragma solidity >=0.4.21 <0.6.0;
 
+import "./TLib.sol";
+
 contract Test {
 
     uint public value;
@@ -9,6 +11,6 @@ contract Test {
     }
 
     function getValue() public view returns(uint) {
-        return value;
+        return TLib.add(value,value);
     }
 }
