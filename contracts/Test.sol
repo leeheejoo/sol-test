@@ -4,10 +4,14 @@ import "./TLib.sol";
 
 contract Test {
 
+    event SetValue(uint value);
+
     uint public value;
 
     function setValue(uint _value) public {
+        require(_value > 1000);
         value = _value;
+        emit SetValue(value);
     }
 
     function getValue() public view returns(uint) {

@@ -9,7 +9,7 @@
             "type": "node",
             "request": "launch",
             "program": "${workspaceRoot}/node_modules/truffle/build/cli.bundled.js",
-            "args": ["test"],
+            "args": ["test", "--network", "test"],
             "cwd": "${workspaceRoot}",
             "outFiles": [
                 "${workspaceRoot}/test/**/*"
@@ -21,7 +21,7 @@
             "type": "node",
             "request": "launch",
             "program": "${workspaceRoot}/node_modules/truffle/build/cli.bundled.js",
-            "args": ["migrate", "test"],
+            "args": ["migrate", "--network", "test"],
             "cwd": "${workspaceRoot}",
             "outFiles": [
                 "${workspaceRoot}/test/**/*"
