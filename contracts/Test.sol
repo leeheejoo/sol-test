@@ -9,12 +9,12 @@ contract Test {
     uint public value;
 
     function setValue(uint _value) public {
-        require(_value > 1000);
+        //require(_value > 0);
         value = _value;
         emit SetValue(value);
     }
 
-    function getValue() public view returns(uint) {
+    function getValue() public view returns(uint ret) {
         return TLib.add(value,value);
     }
 }
