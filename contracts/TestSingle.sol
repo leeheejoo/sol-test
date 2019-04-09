@@ -1,6 +1,6 @@
 pragma solidity >=0.4.21 <0.6.0;
 
-import "./TLib.sol";
+import "./lib/TLib.sol";
 import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 
 contract TestSingle is Ownable {

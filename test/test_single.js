@@ -2,8 +2,8 @@
 const TestSingle = artifacts.require("../contracts/TestSingle.sol");
 
 let Ts;
-let TLibAddr = "0x5ffd14b5Cd0efba05Ecc27BFa9dAC6A022a36Df9";
-let TestSingleAddr = "0x9aEdbdb33621f93f2FA1124E8214c3301fdcd02A";
+let TLibAddr = "0xC68a7d5F48899BbB819dCa4680b94BB4e9788030";
+let TestSingleAddr = "0x0953E2b41B2B7AcB5a439a7fbA2829565Fa57477";
 
 contract("Test Single", async function(accounts) {
     

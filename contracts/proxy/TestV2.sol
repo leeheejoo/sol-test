@@ -1,8 +1,8 @@
 pragma solidity >=0.4.21 <0.6.0;
 
-import "./TLib.sol";
+import "../lib/TLib.sol";
 
-contract TestV1 {
+contract TestV2 {
 
     event SetValue(uint value);
     event SetMultiValue(uint multi);
@@ -20,7 +20,7 @@ contract TestV1 {
     }
 
     function setMultiValue(uint _multi) public {
-        multi = _multi; 
+        multi = _multi*2; 
         emit SetMultiValue(_multi);
     }
 

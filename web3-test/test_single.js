@@ -9,8 +9,8 @@ const TestSingleABI = require('./abi').TestSingleABI;
     try {
         const web3 = new Web3('http://127.0.0.1:7545');                        //testnet : goerli
 
-        let TLibAddr = "0x5ffd14b5Cd0efba05Ecc27BFa9dAC6A022a36Df9";
-        let TestSingleAddr = "0x9aEdbdb33621f93f2FA1124E8214c3301fdcd02A";
+        let TLibAddr = "0xC68a7d5F48899BbB819dCa4680b94BB4e9788030";
+        let TestSingleAddr = "0x0953E2b41B2B7AcB5a439a7fbA2829565Fa57477";
 
         let accounts = await web3.eth.getAccounts(); 
         let fromAddr = accounts[0];
