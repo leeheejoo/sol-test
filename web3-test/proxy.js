@@ -3,6 +3,7 @@
 const Web3 = require('web3');
 const TestProxyABI = require('./abi').TestProxyABI;
 const TestInterfaceABI = require('./abi').TestInterfaceABI;
+const Tx = require('ethereumjs-tx');
 
 // ./geth --goerli --rpc --rpcaddr "0.0.0.0" --rpcapi "admin,eth,net,personal,web3" --ws --wsaddr "0.0.0.0" --wsapi "admin,eth,net,personal,web3" --wsorigins="*"
 // ./geth attach http://localhost:8545
@@ -11,6 +12,44 @@ const TestInterfaceABI = require('./abi').TestInterfaceABI;
 // truffle migrate --network test
 // truffle migrate --network test -f 2 --to 2
 // truffle migrate --network test -f 3 --to 3
+
+async function makeRawTransaction(web3, fromAddr, contractAddress, nonce, abi) {
+
+    let chainId = '5777';                   //ganache
+    //let chainId = '5';                       //testnet : goerli 
+    let gasPriceGwei = web3.utils.toWei('2', 'gwei');
+    let gasLimit = 210000;
+
+    let rawTransaction = {
+        "from": fromAddr,
+        "nonce": "0x" + nonce.toString(16),
+        "gasPrice": web3.utils.toHex(gasPriceGwei),
+        "gasLimit": web3.utils.toHex(gasLimit),
+        "to": contractAddress,
+        "value": "0x0",
+        "data": abi,
+        "chainId": web3.utils.toHex(chainId)
+    };
+
+    return rawTransaction;
+}
+
+async function sendTransction(web3, signedRawTransaction, contract) {
+
+    web3.eth.sendSignedTransaction(signedRawTransaction)
+    .on('transactionHash', console.log)
+    .once('confirmation', async (confirmationNumber, receipt) => {
+
+        if(contract){
+            let value = await contract.methods.calcValue().call();
+            let multi = await contract.methods.getMulti().call();
+            console.log(`get Value ${value.toNumber()}, multi ${multi}`);
+        }
+    })
+    .on('error',  (error) => {
+        console.log(JSON.stringify(error));
+    });
+}
 
 
 (async () => {
@@ -24,6 +63,7 @@ const TestInterfaceABI = require('./abi').TestInterfaceABI;
 
         let accounts = await web3.eth.getAccounts(); 
         let fromAddr = accounts[0];
+        let fromPrivateKey =  new Buffer('7d6971f9b82459891e87f4457ce8c1b952907289cea58f6724634676f0657627', 'hex');
         let testInterface = web3.eth.Contract(TestInterfaceABI,TestProxyAddr);
         let testProxy = web3.eth.Contract(TestProxyABI,TestProxyAddr);
         let nonce = await web3.eth.getTransactionCount(fromAddr);
@@ -32,32 +72,24 @@ const TestInterfaceABI = require('./abi').TestInterfaceABI;
         //let unlock = await web3.eth.personal.unlockAccount(fromAddr,"1234", 600000);
 
         //set
-        let setValue = 222;
-
-        testInterface.methods.setValue(setValue).send({from:fromAddr, nonce:"0x" + nonce.toString(16)})
-        .once('confirmation', async (confirmationNumber, receipt) => {
-
-            let value = await testInterface.methods.calcValue().call();
-            let multi = await testInterface.methods.getMulti().call();
-            console.log(`get Value ${value.toNumber()}, multi ${multi}`);
-        })
+        let rawTransaction = await makeRawTransaction(web3, fromAddr, TestProxyAddr, nonce, testProxy.methods.setTargetAddress(TestV1Addr).encodeABI());
+        let tx = new Tx(rawTransaction);
+        tx.sign(fromPrivateKey);
+        await sendTransction(web3, tx.serialize().toString('hex'));
 
         let setMulti = 1;
         nonce++;
-        testInterface.methods.setMultiValue(setMulti).send({from:fromAddr, nonce:"0x" + nonce.toString(16)})
-        .once('confirmation', async (confirmationNumber, receipt) => {
+        rawTransaction = await makeRawTransaction(web3, fromAddr, TestProxyAddr, nonce, testInterface.methods.setMultiValue(setMulti).encodeABI());
+        tx = new Tx(rawTransaction);
+        tx.sign(fromPrivateKey);
+        await sendTransction(web3, tx.serialize().toString('hex'), testInterface);
 
-            let value = await testInterface.methods.calcValue().call();
-            let multi = await testInterface.methods.getMulti().call();
-            console.log(`get Value ${value.toNumber()}, multi ${multi}`);
-        })
-
+        let setValue = 222;
         nonce++;
-        testProxy.methods.setTargetAddress(TestV2Addr).send({from:fromAddr, nonce:"0x" + nonce.toString(16)})
-        .once('confirmation', async (confirmationNumber, receipt) => {
-
-           let a = 0;
-        })
+        rawTransaction = await makeRawTransaction(web3, fromAddr, TestProxyAddr, nonce, testInterface.methods.setValue(setValue).encodeABI());
+        tx = new Tx(rawTransaction);
+        tx.sign(fromPrivateKey);
+        await sendTransction(web3, tx.serialize().toString('hex'), testInterface);
 
     } catch (e) {
         console.log(e.toString());
