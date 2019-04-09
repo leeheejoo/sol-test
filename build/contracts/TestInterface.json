@@ -27,6 +27,15 @@
     },
     {
       "constant": false,
+      "inputs": [],
+      "name": "init",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
       "inputs": [
         {
           "name": "_multi",
@@ -82,21 +91,21 @@
       "type": "function"
     }
   ],
-  "metadata": "",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.7+commit.6da8b019\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"name\":\"_value\",\"type\":\"uint256\"}],\"name\":\"setValue\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_multi\",\"type\":\"uint256\"}],\"name\":\"setMultiValue\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"calcValue\",\"outputs\":[{\"name\":\"ret\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"init\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getMulti\",\"outputs\":[{\"name\":\"ret\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"SetValue\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"multi\",\"type\":\"uint256\"}],\"name\":\"SetMultiValue\",\"type\":\"event\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/D/truffle/sol-test/contracts/TestInterface.sol\":\"TestInterface\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/D/truffle/sol-test/contracts/TestInterface.sol\":{\"keccak256\":\"0xa00a5208b6d76b4a07cc28916aaaf7ce29cd5b40916656d54175a2a1459606e3\",\"urls\":[\"bzzr://309084029c4a6848cb76ef9d38a07112304c502e0dfa48cff59de87480b9499d\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "pragma solidity >=0.4.21 <0.6.0;\r\n\r\ncontract TestInterface {\r\n\r\n    event SetValue(uint value);\r\n    event SetMultiValue(uint multi);\r\n\r\n    // Test \r\n    function setMultiValue(uint _multi) public;\r\n    function setValue(uint _value) public;\r\n    function calcValue() public view returns (uint ret);\r\n    function getMulti() public view returns (uint ret);\r\n}",
+  "source": "pragma solidity >=0.4.21 <0.6.0;\r\n\r\ninterface TestInterface {\r\n\r\n    event SetValue(uint value);\r\n    event SetMultiValue(uint multi);\r\n\r\n    // Test \r\n    function init() external;\r\n    function setMultiValue(uint _multi) external;\r\n    function setValue(uint _value) external;\r\n    function calcValue() external view returns (uint ret);\r\n    function getMulti() external view returns (uint ret);\r\n}",
   "sourcePath": "D:/truffle/sol-test/contracts/TestInterface.sol",
   "ast": {
     "absolutePath": "/D/truffle/sol-test/contracts/TestInterface.sol",
     "exportedSymbols": {
       "TestInterface": [
-        104
+        107
       ]
     },
-    "id": 105,
+    "id": 108,
     "nodeType": "SourceUnit",
     "nodes": [
       {
@@ -116,12 +125,12 @@
       {
         "baseContracts": [],
         "contractDependencies": [],
-        "contractKind": "contract",
+        "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 104,
+        "id": 107,
         "linearizedBaseContracts": [
-          104
+          107
         ],
         "name": "TestInterface",
         "nodeType": "ContractDefinition",
@@ -143,7 +152,7 @@
                   "name": "value",
                   "nodeType": "VariableDeclaration",
                   "scope": 79,
-                  "src": "83:10:2",
+                  "src": "84:10:2",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -154,7 +163,7 @@
                     "id": 76,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "83:4:2",
+                    "src": "84:4:2",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -164,9 +173,9 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "82:12:2"
+              "src": "83:12:2"
             },
-            "src": "68:27:2"
+            "src": "69:27:2"
           },
           {
             "anonymous": false,
@@ -185,7 +194,7 @@
                   "name": "multi",
                   "nodeType": "VariableDeclaration",
                   "scope": 83,
-                  "src": "121:10:2",
+                  "src": "122:10:2",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -196,7 +205,7 @@
                     "id": 80,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "121:4:2",
+                    "src": "122:4:2",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -206,30 +215,57 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "120:12:2"
+              "src": "121:12:2"
             },
-            "src": "101:32:2"
+            "src": "102:32:2"
           },
           {
             "body": null,
             "documentation": null,
-            "id": 88,
+            "id": 86,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "init",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 84,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "169:2:2"
+            },
+            "returnParameters": {
+              "id": 85,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "180:0:2"
+            },
+            "scope": 107,
+            "src": "156:25:2",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 91,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "setMultiValue",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 86,
+              "id": 89,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 85,
+                  "id": 88,
                   "name": "_multi",
                   "nodeType": "VariableDeclaration",
-                  "scope": 88,
-                  "src": "178:11:2",
+                  "scope": 91,
+                  "src": "210:11:2",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -237,10 +273,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 84,
+                    "id": 87,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "178:4:2",
+                    "src": "210:4:2",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -250,40 +286,40 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "177:13:2"
+              "src": "209:13:2"
             },
             "returnParameters": {
-              "id": 87,
+              "id": 90,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "197:0:2"
+              "src": "231:0:2"
             },
-            "scope": 104,
-            "src": "155:43:2",
+            "scope": 107,
+            "src": "187:45:2",
             "stateMutability": "nonpayable",
             "superFunction": null,
-            "visibility": "public"
+            "visibility": "external"
           },
           {
             "body": null,
             "documentation": null,
-            "id": 93,
+            "id": 96,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "setValue",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 91,
+              "id": 94,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 90,
+                  "id": 93,
                   "name": "_value",
                   "nodeType": "VariableDeclaration",
-                  "scope": 93,
-                  "src": "222:11:2",
+                  "scope": 96,
+                  "src": "256:11:2",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -291,10 +327,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 89,
+                    "id": 92,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "222:4:2",
+                    "src": "256:4:2",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -304,46 +340,46 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "221:13:2"
+              "src": "255:13:2"
             },
             "returnParameters": {
-              "id": 92,
+              "id": 95,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "241:0:2"
+              "src": "277:0:2"
             },
-            "scope": 104,
-            "src": "204:38:2",
+            "scope": 107,
+            "src": "238:40:2",
             "stateMutability": "nonpayable",
             "superFunction": null,
-            "visibility": "public"
+            "visibility": "external"
           },
           {
             "body": null,
             "documentation": null,
-            "id": 98,
+            "id": 101,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "calcValue",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 94,
+              "id": 97,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "266:2:2"
+              "src": "302:2:2"
             },
             "returnParameters": {
-              "id": 97,
+              "id": 100,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 96,
+                  "id": 99,
                   "name": "ret",
                   "nodeType": "VariableDeclaration",
-                  "scope": 98,
-                  "src": "290:8:2",
+                  "scope": 101,
+                  "src": "328:8:2",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -351,10 +387,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 95,
+                    "id": 98,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "290:4:2",
+                    "src": "328:4:2",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -364,40 +400,40 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "289:10:2"
+              "src": "327:10:2"
             },
-            "scope": 104,
-            "src": "248:52:2",
+            "scope": 107,
+            "src": "284:54:2",
             "stateMutability": "view",
             "superFunction": null,
-            "visibility": "public"
+            "visibility": "external"
           },
           {
             "body": null,
             "documentation": null,
-            "id": 103,
+            "id": 106,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getMulti",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 99,
+              "id": 102,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "323:2:2"
+              "src": "361:2:2"
             },
             "returnParameters": {
-              "id": 102,
+              "id": 105,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 101,
+                  "id": 104,
                   "name": "ret",
                   "nodeType": "VariableDeclaration",
-                  "scope": 103,
-                  "src": "347:8:2",
+                  "scope": 106,
+                  "src": "387:8:2",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -405,10 +441,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 100,
+                    "id": 103,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "347:4:2",
+                    "src": "387:4:2",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -418,29 +454,29 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "346:10:2"
+              "src": "386:10:2"
             },
-            "scope": 104,
-            "src": "306:51:2",
+            "scope": 107,
+            "src": "344:53:2",
             "stateMutability": "view",
             "superFunction": null,
-            "visibility": "public"
+            "visibility": "external"
           }
         ],
-        "scope": 105,
-        "src": "36:324:2"
+        "scope": 108,
+        "src": "36:364:2"
       }
     ],
-    "src": "0:360:2"
+    "src": "0:400:2"
   },
   "legacyAST": {
     "absolutePath": "/D/truffle/sol-test/contracts/TestInterface.sol",
     "exportedSymbols": {
       "TestInterface": [
-        104
+        107
       ]
     },
-    "id": 105,
+    "id": 108,
     "nodeType": "SourceUnit",
     "nodes": [
       {
@@ -460,12 +496,12 @@
       {
         "baseContracts": [],
         "contractDependencies": [],
-        "contractKind": "contract",
+        "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 104,
+        "id": 107,
         "linearizedBaseContracts": [
-          104
+          107
         ],
         "name": "TestInterface",
         "nodeType": "ContractDefinition",
@@ -487,7 +523,7 @@
                   "name": "value",
                   "nodeType": "VariableDeclaration",
                   "scope": 79,
-                  "src": "83:10:2",
+                  "src": "84:10:2",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -498,7 +534,7 @@
                     "id": 76,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "83:4:2",
+                    "src": "84:4:2",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -508,9 +544,9 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "82:12:2"
+              "src": "83:12:2"
             },
-            "src": "68:27:2"
+            "src": "69:27:2"
           },
           {
             "anonymous": false,
@@ -529,7 +565,7 @@
                   "name": "multi",
                   "nodeType": "VariableDeclaration",
                   "scope": 83,
-                  "src": "121:10:2",
+                  "src": "122:10:2",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -540,7 +576,7 @@
                     "id": 80,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "121:4:2",
+                    "src": "122:4:2",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -550,30 +586,57 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "120:12:2"
+              "src": "121:12:2"
             },
-            "src": "101:32:2"
+            "src": "102:32:2"
           },
           {
             "body": null,
             "documentation": null,
-            "id": 88,
+            "id": 86,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "init",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 84,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "169:2:2"
+            },
+            "returnParameters": {
+              "id": 85,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "180:0:2"
+            },
+            "scope": 107,
+            "src": "156:25:2",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 91,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "setMultiValue",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 86,
+              "id": 89,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 85,
+                  "id": 88,
                   "name": "_multi",
                   "nodeType": "VariableDeclaration",
-                  "scope": 88,
-                  "src": "178:11:2",
+                  "scope": 91,
+                  "src": "210:11:2",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -581,10 +644,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 84,
+                    "id": 87,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "178:4:2",
+                    "src": "210:4:2",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -594,40 +657,40 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "177:13:2"
+              "src": "209:13:2"
             },
             "returnParameters": {
-              "id": 87,
+              "id": 90,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "197:0:2"
+              "src": "231:0:2"
             },
-            "scope": 104,
-            "src": "155:43:2",
+            "scope": 107,
+            "src": "187:45:2",
             "stateMutability": "nonpayable",
             "superFunction": null,
-            "visibility": "public"
+            "visibility": "external"
           },
           {
             "body": null,
             "documentation": null,
-            "id": 93,
+            "id": 96,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "setValue",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 91,
+              "id": 94,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 90,
+                  "id": 93,
                   "name": "_value",
                   "nodeType": "VariableDeclaration",
-                  "scope": 93,
-                  "src": "222:11:2",
+                  "scope": 96,
+                  "src": "256:11:2",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -635,10 +698,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 89,
+                    "id": 92,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "222:4:2",
+                    "src": "256:4:2",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -648,46 +711,46 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "221:13:2"
+              "src": "255:13:2"
             },
             "returnParameters": {
-              "id": 92,
+              "id": 95,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "241:0:2"
+              "src": "277:0:2"
             },
-            "scope": 104,
-            "src": "204:38:2",
+            "scope": 107,
+            "src": "238:40:2",
             "stateMutability": "nonpayable",
             "superFunction": null,
-            "visibility": "public"
+            "visibility": "external"
           },
           {
             "body": null,
             "documentation": null,
-            "id": 98,
+            "id": 101,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "calcValue",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 94,
+              "id": 97,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "266:2:2"
+              "src": "302:2:2"
             },
             "returnParameters": {
-              "id": 97,
+              "id": 100,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 96,
+                  "id": 99,
                   "name": "ret",
                   "nodeType": "VariableDeclaration",
-                  "scope": 98,
-                  "src": "290:8:2",
+                  "scope": 101,
+                  "src": "328:8:2",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -695,10 +758,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 95,
+                    "id": 98,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "290:4:2",
+                    "src": "328:4:2",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -708,40 +771,40 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "289:10:2"
+              "src": "327:10:2"
             },
-            "scope": 104,
-            "src": "248:52:2",
+            "scope": 107,
+            "src": "284:54:2",
             "stateMutability": "view",
             "superFunction": null,
-            "visibility": "public"
+            "visibility": "external"
           },
           {
             "body": null,
             "documentation": null,
-            "id": 103,
+            "id": 106,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getMulti",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 99,
+              "id": 102,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "323:2:2"
+              "src": "361:2:2"
             },
             "returnParameters": {
-              "id": 102,
+              "id": 105,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 101,
+                  "id": 104,
                   "name": "ret",
                   "nodeType": "VariableDeclaration",
-                  "scope": 103,
-                  "src": "347:8:2",
+                  "scope": 106,
+                  "src": "387:8:2",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -749,10 +812,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 100,
+                    "id": 103,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "347:4:2",
+                    "src": "387:4:2",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -762,28 +825,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "346:10:2"
+              "src": "386:10:2"
             },
-            "scope": 104,
-            "src": "306:51:2",
+            "scope": 107,
+            "src": "344:53:2",
             "stateMutability": "view",
             "superFunction": null,
-            "visibility": "public"
+            "visibility": "external"
           }
         ],
-        "scope": 105,
-        "src": "36:324:2"
+        "scope": 108,
+        "src": "36:364:2"
       }
     ],
-    "src": "0:360:2"
+    "src": "0:400:2"
   },
   "compiler": {
     "name": "solc",
-    "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
+    "version": "0.5.7+commit.6da8b019.Emscripten.clang"
   },
   "networks": {},
   "schemaVersion": "3.0.6",
-  "updatedAt": "2019-04-09T03:17:57.527Z",
+  "updatedAt": "2019-04-09T09:31:32.193Z",
   "devdoc": {
     "methods": {}
   },

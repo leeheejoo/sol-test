@@ -1,25 +1,15 @@
 pragma solidity >=0.4.21 <0.6.0;
 
 contract TestProxy {
-    
-    address private targetAddress;
-    address private owner;
 
-    event OnlyOwner(address owner, address sender);
+    address private targetAddress;
 
     constructor(address _address) public {
-        owner = msg.sender;
         setTargetAddress(_address);
     }
 
-    modifier onlyOwner() {
-        require(msg.sender == owner, "owner is differnt !!!");
-        _;
-    }
-
     function setTargetAddress(address _address) public {
-        emit OnlyOwner(msg.sender,owner);
-        require(_address != address(0), "address is 0x0");
+        require(_address != address(0), "address is 0x0!!");
         targetAddress = _address;
     }
 

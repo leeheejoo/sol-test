@@ -1,25 +1,21 @@
 pragma solidity >=0.4.21 <0.6.0;
 
 import "./TLib.sol";
+import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 
-contract TestV1 {
+contract TestSingle is Ownable {
 
     event SetValue(uint value);
     event SetMultiValue(uint multi);
 
-    uint multi;
-    uint value;
+    uint multi = 1;
+    uint value = 0;
 
     constructor () public {
-        init();
+
     }
 
-    function init() public {
-        multi = 1;
-        value = 0;
-    }
-
-    function setMultiValue(uint _multi) public {
+    function setMultiValue(uint _multi) public onlyOwner {
         multi = _multi; 
         emit SetMultiValue(_multi);
     }

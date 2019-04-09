@@ -26,10 +26,10 @@
       "signature": "0x771602f7"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.2+commit.1df8f40c\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[{\"name\":\"_a\",\"type\":\"uint256\"},{\"name\":\"_b\",\"type\":\"uint256\"}],\"name\":\"add\",\"outputs\":[{\"name\":\"ret\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/D/truffle/sol-test/contracts/TLib.sol\":\"TLib\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/D/truffle/sol-test/contracts/TLib.sol\":{\"keccak256\":\"0x3b27fada5c02144cf8644cd2542968b4ea5be6842f472b49569e4c0bb776205a\",\"urls\":[\"bzzr://61b82b54afd8007124dc433c069486fbc3d782e9c8d65b6e6971f1133381ae19\"]}},\"version\":1}",
-  "bytecode": "0x60d761002f600b82828239805160001a6073146000811461001f57610021565bfe5b5030600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600436106050576000357c010000000000000000000000000000000000000000000000000000000090048063771602f7146055575b600080fd5b608860048036036040811015606957600080fd5b810190808035906020019092919080359060200190929190505050609e565b6040518082815260200191505060405180910390f35b600081830190509291505056fea165627a7a7230582077cffa6bbf2474b2d3657ffe4dd82747dc877ee68e8ffb9a2ca869f4824879c50029",
-  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600436106050576000357c010000000000000000000000000000000000000000000000000000000090048063771602f7146055575b600080fd5b608860048036036040811015606957600080fd5b810190808035906020019092919080359060200190929190505050609e565b6040518082815260200191505060405180910390f35b600081830190509291505056fea165627a7a7230582077cffa6bbf2474b2d3657ffe4dd82747dc877ee68e8ffb9a2ca869f4824879c50029",
-  "sourceMap": "36:120:1:-;;132:2:-1;166:7;155:9;146:7;137:37;252:7;246:14;243:1;238:23;232:4;229:33;270:1;265:20;;;;222:63;;265:20;274:9;222:63;;298:9;295:1;288:20;328:4;319:7;311:22;352:7;343;336:24",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.7+commit.6da8b019\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[{\"name\":\"_a\",\"type\":\"uint256\"},{\"name\":\"_b\",\"type\":\"uint256\"}],\"name\":\"add\",\"outputs\":[{\"name\":\"ret\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/D/truffle/sol-test/contracts/TLib.sol\":\"TLib\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/D/truffle/sol-test/contracts/TLib.sol\":{\"keccak256\":\"0x3b27fada5c02144cf8644cd2542968b4ea5be6842f472b49569e4c0bb776205a\",\"urls\":[\"bzzr://61b82b54afd8007124dc433c069486fbc3d782e9c8d65b6e6971f1133381ae19\"]}},\"version\":1}",
+  "bytecode": "0x60d7610025600b82828239805160001a60731461001857fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600436106050576000357c010000000000000000000000000000000000000000000000000000000090048063771602f7146055575b600080fd5b608860048036036040811015606957600080fd5b810190808035906020019092919080359060200190929190505050609e565b6040518082815260200191505060405180910390f35b600081830190509291505056fea165627a7a723058209b9b3b017253d5e5f17948402fee04ea28d8215c583151abbfa4ee95f3fe608e0029",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600436106050576000357c010000000000000000000000000000000000000000000000000000000090048063771602f7146055575b600080fd5b608860048036036040811015606957600080fd5b810190808035906020019092919080359060200190929190505050609e565b6040518082815260200191505060405180910390f35b600081830190509291505056fea165627a7a723058209b9b3b017253d5e5f17948402fee04ea28d8215c583151abbfa4ee95f3fe608e0029",
+  "sourceMap": "36:120:1:-;;132:2:-1;166:7;155:9;146:7;137:37;255:7;249:14;246:1;241:23;235:4;232:33;222:2;;269:9;222:2;293:9;290:1;283:20;323:4;314:7;306:22;347:7;338;331:24",
   "deployedSourceMap": "36:120:1:-;;;;;;;;;;;;;;;;;;;;;;;;;58:95;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;58:95:1;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;110:8;143:2;138;:7;131:14;;58:95;;;;:::o",
   "source": "pragma solidity >=0.4.21 <0.6.0;\r\n\r\nlibrary TLib {\r\n\r\n    function add(uint _a, uint _b) public pure returns (uint ret) {\r\n        return _a + _b;\r\n    }\r\n}",
   "sourcePath": "D:\\truffle\\sol-test\\contracts\\TLib.sol",
@@ -451,18 +451,18 @@
   },
   "compiler": {
     "name": "solc",
-    "version": "0.5.2+commit.1df8f40c.Emscripten.clang"
+    "version": "0.5.7+commit.6da8b019.Emscripten.clang"
   },
   "networks": {
     "5777": {
       "events": {},
       "links": {},
-      "address": "0xB2d9f008ad03E80b256c55A01d9FB05514b6831e",
-      "transactionHash": "0x8ae24b44225b7f5fbda9fc98d752f10ce89393af827b3a36aa4ea39cb57128e9"
+      "address": "0x5ffd14b5Cd0efba05Ecc27BFa9dAC6A022a36Df9",
+      "transactionHash": "0x1186d402d07f9992269b48ebf101254b5ba4383197e4b16961c9d433911f53e2"
     }
   },
   "schemaVersion": "3.0.6",
-  "updatedAt": "2019-04-09T03:17:58.368Z",
+  "updatedAt": "2019-04-09T09:36:22.059Z",
   "devdoc": {
     "methods": {}
   },
