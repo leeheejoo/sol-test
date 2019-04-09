@@ -1,0 +1,40 @@
+pragma solidity >=0.4.21 <0.6.0;
+
+contract TestProxy {
+    
+    address private targetAddress;
+    address private owner;
+
+    event OnlyOwner(address owner, address sender);
+
+    constructor(address _address) public {
+        owner = msg.sender;
+        setTargetAddress(_address);
+    }
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "owner is differnt !!!");
+        _;
+    }
+
+    function setTargetAddress(address _address) public {
+        emit OnlyOwner(msg.sender,owner);
+        require(_address != address(0), "address is 0x0");
+        targetAddress = _address;
+    }
+
+    function () external payable {
+        address contractAddr = targetAddress;
+        assembly {
+            let ptr := mload(0x40)
+            calldatacopy(ptr, 0, calldatasize)
+            let result := delegatecall(gas, contractAddr, ptr, calldatasize, 0, 0)
+            let size := returndatasize
+            returndatacopy(ptr, 0, size)
+
+            switch result
+            case 0 { revert(ptr, size) }
+            default { return(ptr, size) }
+        }
+    }
+}

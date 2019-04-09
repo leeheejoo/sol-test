@@ -38,10 +38,13 @@ module.exports = {
   networks: {
 
     test: {
-       host: "127.0.0.1",     // Localhost (default: none)
-       port: 7545,            // Standard Ethereum port (default: none)
-       network_id: "*",       // Any network (default: none)
-      },
+      host: "127.0.0.1",     // Localhost (default: none)
+      port: 7545,            // Standard Ethereum port (default: none)
+      network_id: "*",       // Any network (default: none)
+      from: "0x67b9064343c1A69C92c27f143De2EC33527937ce",
+      gas: 2000000,           // Gas sent with each transaction (default: ~6700000)
+      gasPrice: 40000000000,  // 20 gwei (in wei) (default: 100 gwei)
+    },
   
 
     // Useful for testing. The `development` name is special - truffle uses it by default

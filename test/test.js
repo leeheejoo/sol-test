@@ -1,21 +1,61 @@
-const Test = artifacts.require("../contracts/Test.sol");
+const TestInterface = artifacts.require("../contracts/TestInterface.sol");
+const TestProxy = artifacts.require("../contracts/TestProxy.sol");
+
+let Ti;
+let Tp;
+let TLibAddr = "0xB2d9f008ad03E80b256c55A01d9FB05514b6831e";
+let TestV1Addr = "0xA35592467426D4C303fd22cc9D1f30E01cAd853F";
+let TestV2Addr = "0xC4fC019A197bAe978675F70775d0dFD123429Cb6";
+let TestProxyAddr = "0xE756A02dc04a5a6B7437Bb067Ce0cD1f058fF9b6";
+
 
 contract("Test", async function(accounts) {
+    
+    before(async function () {
 
-    it("basic Test", async () => {
+        // get Test Proxy
+        Tp = await TestProxy.at(TestProxyAddr, { from: accounts[0] });
+        Ti = await TestInterface.at(TestProxyAddr, { from: accounts[0] });
 
-        let accounts = await web3.eth.getAccounts();
-        //let gasLimit = await web3.eth.estimateGas();
+        //const contract = await Test.at("0xe2f7495e2FF54eC6245f55095B47653f4Ad28a06");     //testnet : goerli
+    })
 
-        //const contract = await Test.at("0x20B3eFb515548804D026279475FC4Ac01500fEd1");       //ganache
-        const contract = await Test.at("0x9f052Cd54ac0187F42736E4cE31F0757f10e881a");     //testnet : goerli
+    describe('test', function () {
+        it("basic Test", async () => {
 
-        let testValue = 222;
-        let ret = await contract.setValue(testValue);
-        ret = await contract.setMultiValue(2);
-        let multi = await contract.multi();
-        let value = await contract.calcValue();
-        assert.equal(value,(testValue+testValue)*multi);
+            //let accounts = await web3.eth.getAccounts();
+            //let gasLimit = await web3.eth.estimateGas();
+
+            // Set Target TestV1    
+            let aa = await Tp.setTargetAddress(TestV1Addr, { from: accounts[0] });
+
+            let testValue = 222;
+            let ret = await Ti.setValue(testValue);
+            let multiValue = 1;
+            ret = await Ti.setMultiValue(multiValue);
+            let multi = await Ti.getMulti();
+            multi = multi.toNumber();
+            let value = await Ti.calcValue();
+            value = value.toNumber();
+            assert.equal(value,(testValue+testValue)*multi);
+        });
+
+        it("Proxy Test", async () => {
+
+            // Change Target TestV2    
+
+            let aa = await Tp.setTargetAddress(TestV2Addr, { from: accounts[0] });
+
+            let testValue = 222;
+            let ret = await Ti.setValue(testValue);
+            let multiValue = 1;
+            ret = await Ti.setMultiValue(multiValue);
+            let multi = await Ti.getMulti();
+            multi = multi.toNumber();
+            let value = await Ti.calcValue();
+            value = value.toNumber();
+            assert.equal(value,(testValue+testValue)*multi);
+        });
     });
 
 });

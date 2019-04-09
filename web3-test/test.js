@@ -1,12 +1,15 @@
+"use strict";
+
 const Web3 = require('web3');
-const abi = require('./abi').abi1;
+const TestVABI = require('./abi').TestVABI;
 
 // ./geth --goerli --rpc --rpcaddr "0.0.0.0" --rpcapi "admin,eth,net,personal,web3" --ws --wsaddr "0.0.0.0" --wsapi "admin,eth,net,personal,web3" --wsorigins="*"
 // ./geth attach http://localhost:8545
 // ./geth attach ws://localhost:8546
 
-// truffle migrate --network dev
-
+// truffle migrate --network test
+// truffle migrate --network test -f 2 --to 2
+// truffle migrate --network test -f 3 --to 3
 
 async function makeRawTransaction(web3, fromAddr, contractAddress, nonce, abi) {
 
@@ -49,27 +52,58 @@ async function sendTransction(web3, signedRawTransaction, contract) {
 
 (async () => {
     try {
-        const web3 = new Web3('http://192.168.56.222:8545');                        //testnet : goerli
-        let contractAddress = `0x9f052Cd54ac0187F42736E4cE31F0757f10e881a`;         //testnet : goerli
+        const web3 = new Web3('ws://192.168.56.222:8546');                        //testnet : goerli
+        let contractAddress = `0xe2f7495e2FF54eC6245f55095B47653f4Ad28a06`;         //testnet : goerli
 
         let accounts = await web3.eth.getAccounts(); 
-        let fromAddr = accounts[0];
-        let testContract = web3.eth.Contract(abi,contractAddress);
+        let fromAddr = accounts[1];
+        let testContract = web3.eth.Contract(TestVABI,contractAddress);
         let nonce = await web3.eth.getTransactionCount(fromAddr);
 
+        testContract.events.allEvents({fromBlock: 'latest'})  // ws 방식으로만 가능
+        //testContract.events.SetValue({fromBlock: 'latest'})
+        .on('data', (event) => {
+            console.log(JSON.stringify(event));     // same results as the optional callback above
+        })
+        .on('changed', (event) => {
+            console.log(JSON.stringify(event));     // remove event from local database
+        })
+        .on('error', (error) => {
+            console.log(JSON.stringify(error));
+        })
+
+
         //testnet : goerli
-        //let unlock = await web3.eth.personal.unlockAccount(fromAddr,"1234", 600000);
+        let unlock = await web3.eth.personal.unlockAccount(fromAddr,"1234", 600000);
 
         //set
         let setValue = 222;
-        let rawTransaction = await makeRawTransaction(web3, fromAddr, contractAddress, nonce, testContract.methods.setValue(setValue).encodeABI());
-        let signedTx = await web3.eth.personal.signTransaction(rawTransaction,"1234");
-        await sendTransction(web3, signedTx.raw, testContract);
+
+        testContract.methods.setValue(setValue).send({from:fromAddr, nonce:"0x" + nonce.toString(16)})
+        .once('confirmation', async (confirmationNumber, receipt) => {
+
+            let value = await testContract.methods.calcValue().call();
+            let multi = await testContract.methods.getMulti().call();
+            console.log(`get Value ${value.toNumber()}, multi ${multi}`);
+        })
+
+        // let rawTransaction = await makeRawTransaction(web3, fromAddr, contractAddress, nonce, testContract.methods.setValue(setValue).encodeABI());
+        // let signedTx = await web3.eth.personal.signTransaction(rawTransaction,"1234");
+        // await sendTransction(web3, signedTx.raw, testContract);
 
         let setMulti = 3;
-        let rawTransaction2 = await makeRawTransaction(web3, fromAddr, contractAddress, nonce+1, testContract.methods.setMultiValue(setMulti).encodeABI());
-        let signedTx2 = await web3.eth.personal.signTransaction(rawTransaction2,"1234");
-        await sendTransction(web3,  signedTx2.raw, testContract);
+        nonce++;
+        testContract.methods.setMultiValue(setMulti).send({from:fromAddr, nonce:"0x" + nonce.toString(16)})
+        .once('confirmation', async (confirmationNumber, receipt) => {
+
+            let value = await testContract.methods.calcValue().call();
+            let multi = await testContract.methods.getMulti().call();
+            console.log(`get Value ${value.toNumber()}, multi ${multi}`);
+        })
+
+        // let rawTransaction2 = await makeRawTransaction(web3, fromAddr, contractAddress, nonce+1, testContract.methods.setMultiValue(setMulti).encodeABI());
+        // let signedTx2 = await web3.eth.personal.signTransaction(rawTransaction2,"1234");
+        // await sendTransction(web3,  signedTx2.raw, testContract);
 
     } catch (e) {
         console.log(e.toString());
