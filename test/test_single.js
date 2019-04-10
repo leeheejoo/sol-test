@@ -2,8 +2,8 @@
 const TestSingle = artifacts.require("../contracts/TestSingle.sol");
 
 let Ts;
-let TLibAddr = "0x37D710b601b7430F335b3aFfF6Cf16899B55c4d1";
-let TestSingleAddr = "0x886279D880B09914544C9774AA89fD3c8bCaf28E";
+let TLibAddr = "0x70d116428d0232E78973A87a367eCDFE237fdBf5";
+let TestSingleAddr = "0x7fd76a5D9dC910CD34e4f8F93dF42A863c4df643";
 
 contract("Test Single", async function(accounts) {
     
@@ -58,6 +58,10 @@ contract("Test Single", async function(accounts) {
             console.log(`       contract balance is ${balance2.toString()}`);
         });
 
+        // it("destruct Test", async () => {
+        //     let ret = await Ts.close( { from: accounts[0] });
+        //     console.log(`       contract destructed!!`);
+        // });
     });
 
 });

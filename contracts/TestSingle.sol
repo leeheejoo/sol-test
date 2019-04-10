@@ -55,4 +55,8 @@ contract TestSingle is Ownable {
     function getEther() public view returns (uint) {
         return address(this).balance;
     }
+
+    function close() public onlyOwner {
+        selfdestruct(address(uint160(owner())));
+    }
 }

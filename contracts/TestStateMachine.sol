@@ -26,15 +26,15 @@ contract TestStateMachine {
 
     modifier transitionAfter() {
         _;
-        nextStage();
+        _nextStage();
     }
 
     modifier timedTransitions() {
         if (stage == Stages.AcceptingBlindBids && now >= creationTime + 2 minutes) {
-            nextStage();
+            _nextStage();
         }
         if (stage == Stages.RevealBids && now >= creationTime + 4 minutes) {
-            nextStage();
+            _nextStage();
         }
         _;
     }
@@ -59,7 +59,7 @@ contract TestStateMachine {
         emit Finish('current state is Finished!!');
     }
 
-    function nextStage() internal {
+    function _nextStage() internal {
         require(stage != Stages.Finished, 'current state is finished!!');
         stage = Stages(uint(stage) + 1);
     }
