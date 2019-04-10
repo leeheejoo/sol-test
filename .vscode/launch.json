@@ -15,7 +15,7 @@
             "type": "node",
             "request": "launch",
             "program": "${workspaceRoot}/node_modules/truffle/build/cli.bundled.js",
-            "args": ["test", "--network", "test", "./test/test_single.js"],
+            "args": ["test", "--network", "test", "./test/test_buy_contract.js"],
             "cwd": "${workspaceRoot}",
             "outFiles": [
                 "${workspaceRoot}/test/**/*"
