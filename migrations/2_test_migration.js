@@ -13,11 +13,7 @@ module.exports = async function(deployer,network,accounts) {
 
   } else if(network == "dev"){
 
-    let migrate = false;
-    deployer.deploy(TLib,{overwrite: migrate});
-    deployer.link(TLib,Test);
-    deployer.deploy(Test,{overwrite: migrate});
-
+    
   }
 
 };

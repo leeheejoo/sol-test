@@ -10,6 +10,7 @@ contract TestSingle is Ownable {
 
     uint multi = 1;
     uint value = 0;
+    TLib.Data tdata;
 
     constructor () public {
 
@@ -26,12 +27,15 @@ contract TestSingle is Ownable {
         emit SetValue(value);
     }
 
-    function calcValue() public view returns(uint ret) {
-        uint added = TLib.add(value,value);
-        return added * multi;
+    function calcValue() public {
+        TLib.test1(tdata,value,value);
     }
 
-    function getMulti() public view returns (uint ret) {
+    function getCalcValue() public view returns (uint) {
+        return tdata.testUint * multi;
+    }
+
+    function getMulti() public view returns (uint) {
         return multi;
     }
 }

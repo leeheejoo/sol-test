@@ -234,7 +234,7 @@ exports.TestProxyABI = [
 
 ///////////////////////////////////
 
-exports.TestSingleABI =  [
+exports.TestSingleABI =   [
   {
     "constant": false,
     "inputs": [],
@@ -372,17 +372,17 @@ exports.TestSingleABI =  [
     "signature": "0x55241077"
   },
   {
-    "constant": true,
+    "constant": false,
     "inputs": [],
     "name": "calcValue",
     "outputs": [
       {
-        "name": "ret",
+        "name": "",
         "type": "uint256"
       }
     ],
     "payable": false,
-    "stateMutability": "view",
+    "stateMutability": "nonpayable",
     "type": "function",
     "signature": "0xdd3c9854"
   },
@@ -392,7 +392,7 @@ exports.TestSingleABI =  [
     "name": "getMulti",
     "outputs": [
       {
-        "name": "ret",
+        "name": "",
         "type": "uint256"
       }
     ],
