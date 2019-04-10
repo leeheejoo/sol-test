@@ -234,7 +234,7 @@ exports.TestProxyABI = [
 
 ///////////////////////////////////
 
-exports.TestSingleABI =   [
+exports.TestSingleABI =  [
   {
     "constant": false,
     "inputs": [],
@@ -298,6 +298,11 @@ exports.TestSingleABI =   [
     "signature": "constructor"
   },
   {
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "fallback"
+  },
+  {
     "anonymous": false,
     "inputs": [
       {
@@ -322,6 +327,42 @@ exports.TestSingleABI =   [
     "name": "SetMultiValue",
     "type": "event",
     "signature": "0xb03d1c32084198c13732e46d3e173999e5311cd931aff5ccea60d0bf63227a8c"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "sender",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "DepositEther",
+    "type": "event",
+    "signature": "0xe628a607143b255f52afd0900e0d9630dd009c2f2635cd1e28c7aeeeff940802"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "to",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "TransferEther",
+    "type": "event",
+    "signature": "0xb3b1161e7ca4497d76487715c8809b3ceacaf2159449df2f44a4d29cb609a008"
   },
   {
     "anonymous": false,
@@ -375,6 +416,16 @@ exports.TestSingleABI =   [
     "constant": false,
     "inputs": [],
     "name": "calcValue",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xdd3c9854"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getCalcValue",
     "outputs": [
       {
         "name": "",
@@ -382,9 +433,9 @@ exports.TestSingleABI =   [
       }
     ],
     "payable": false,
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function",
-    "signature": "0xdd3c9854"
+    "signature": "0xd8b24a38"
   },
   {
     "constant": true,
@@ -400,5 +451,39 @@ exports.TestSingleABI =   [
     "stateMutability": "view",
     "type": "function",
     "signature": "0xf3c66284"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_to",
+        "type": "address"
+      },
+      {
+        "name": "_amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "transferEther",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function",
+    "signature": "0x05b1137b"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getEther",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0xde0ff7c5"
   }
 ];

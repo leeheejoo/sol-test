@@ -1,7 +1,7 @@
 "use strict";
 
 const Web3 = require('web3');
-const TestVABI = require('./abi').TestVABI;
+const TestVABI = require('./abi/abi').TestVABI;
 
 // ./geth --goerli --rpc --rpcaddr "0.0.0.0" --rpcapi "admin,eth,net,personal,web3" --ws --wsaddr "0.0.0.0" --wsapi "admin,eth,net,personal,web3" --wsorigins="*"
 // ./geth attach http://localhost:8545

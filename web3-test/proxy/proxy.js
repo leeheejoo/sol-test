@@ -1,8 +1,8 @@
 "use strict";
 
 const Web3 = require('web3');
-const TestProxyABI = require('./abi').TestProxyABI;
-const TestInterfaceABI = require('./abi').TestInterfaceABI;
+const TestProxyABI = require('../abi/abi').TestProxyABI;
+const TestInterfaceABI = require('../abi/abi').TestInterfaceABI;
 
 // ./geth --goerli --rpc --rpcaddr "0.0.0.0" --rpcapi "admin,eth,net,personal,web3" --ws --wsaddr "0.0.0.0" --wsapi "admin,eth,net,personal,web3" --wsorigins="*"
 // ./geth attach http://localhost:8545

@@ -1,7 +1,7 @@
 "use strict";
 
 const Web3 = require('web3');
-const TestSingleABI = require('./abi').TestSingleABI;
+const TestSingleABI = require('./abi/abi').TestSingleABI;
 
 // truffle migrate --network test -f 4 --to 4
 

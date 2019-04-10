@@ -1,9 +1,9 @@
 "use strict";
 
 const Web3 = require('web3');
-const TestVABI = require('./abi').TestVABI;
-const TestProxyABI = require('./abi').TestProxyABI;
-const TestInterfaceABI = require('./abi').TestInterfaceABI;
+const TestVABI = require('../abi/abi').TestVABI;
+const TestProxyABI = require('../abi/abi').TestProxyABI;
+const TestInterfaceABI = require('../abi/abi').TestInterfaceABI;
 const Tx = require('ethereumjs-tx');
 
 // ./geth --goerli --rpc --rpcaddr "0.0.0.0" --rpcapi "admin,eth,net,personal,web3" --ws --wsaddr "0.0.0.0" --wsapi "admin,eth,net,personal,web3" --wsorigins="*"
