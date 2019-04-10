@@ -46,6 +46,7 @@ contract TestSingle is Ownable {
     }
 
     function transferEther(address _to, uint _amount) public payable onlyOwner {
+        require(_to != address(0), "address is 0x0!!");
         require(address(this).balance >= _amount, 'ether is less than amount to send !!!');
         address(uint160(_to)).transfer(_amount);
         emit TransferEther(_to,_amount);
