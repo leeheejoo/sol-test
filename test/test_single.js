@@ -2,8 +2,8 @@
 const TestSingle = artifacts.require("../contracts/TestSingle.sol");
 
 let Ts;
-let TLibAddr = "0x1c3d6fb5cE79B1E20218260411Fae2Ca89013E85";
-let TestSingleAddr = "0xb47FD51463fAB33B7E7fE79770bC56c4cFfa787B";
+let TLibAddr = "0x37D710b601b7430F335b3aFfF6Cf16899B55c4d1";
+let TestSingleAddr = "0x886279D880B09914544C9774AA89fD3c8bCaf28E";
 
 contract("Test Single", async function(accounts) {
     
@@ -14,7 +14,8 @@ contract("Test Single", async function(accounts) {
 
     })
 
-    describe('test single', function () {
+    /*
+    describe('test basic', function () {
         it("basic Test", async () => {
 
             let multi = await Ts.getMulti();
@@ -34,6 +35,27 @@ contract("Test Single", async function(accounts) {
             value = value.toNumber();
 
             assert.equal(value,11);
+        });
+
+    });
+*/
+    
+    describe('test transfer', function () {
+        it("basic Test", async () => {
+
+            let amount = web3.utils.toWei("1", "ether");
+            let ret = await Ts.send(amount,{ from: accounts[0] });
+            let balance = await web3.eth.getBalance(Ts.address);
+            let balance2 = await Ts.getEther({ from: accounts[0] });
+
+            assert.equal(balance,balance2);
+
+            let to = "0x90d02CC8Aa547BeF1F7A27F83507327EBbeee7C7";
+            amount = web3.utils.toWei("1", "ether");
+            ret = await Ts.transferEther(to, amount, { from: accounts[0] });
+
+            balance = await web3.eth.getBalance(Ts.address);
+            console.log(`       contract balance is ${balance2.toString()}`);
         });
 
     });

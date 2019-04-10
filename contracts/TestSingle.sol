@@ -7,6 +7,8 @@ contract TestSingle is Ownable {
 
     event SetValue(uint value);
     event SetMultiValue(uint multi);
+    event DepositEther(address sender, uint amount);
+    event TransferEther(address to, uint amount);
 
     uint multi = 1;
     uint value = 0;
@@ -14,6 +16,10 @@ contract TestSingle is Ownable {
 
     constructor () public {
 
+    }
+
+    function() external payable { 
+        emit DepositEther(msg.sender, msg.value);
     }
 
     function setMultiValue(uint _multi) public onlyOwner {
@@ -37,5 +43,15 @@ contract TestSingle is Ownable {
 
     function getMulti() public view returns (uint) {
         return multi;
+    }
+
+    function transferEther(address _to, uint _amount) public payable onlyOwner {
+        require(address(this).balance >= _amount, 'ether is less than amount to send !!!');
+        address(uint160(_to)).transfer(_amount);
+        emit TransferEther(_to,_amount);
+    }
+
+    function getEther() public view returns (uint) {
+        return address(this).balance;
     }
 }
