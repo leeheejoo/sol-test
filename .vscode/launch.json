@@ -15,7 +15,7 @@
             "type": "node",
             "request": "launch",
             "program": "${workspaceRoot}/node_modules/truffle/build/cli.bundled.js",
-            "args": ["test", "--network", "test", "./test/test_cei.js"],
+            "args": ["test", "--network", "test", "./test/test_emergency_stop.js"],
             "cwd": "${workspaceRoot}",
             "outFiles": [
                 "${workspaceRoot}/test/**/*"
